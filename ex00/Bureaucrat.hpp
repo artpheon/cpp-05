@@ -1,7 +1,10 @@
 #pragma once
-#include <string>
-#include <iostream>
-#include <exception>
+#ifndef BUREAUCRAT_H
+# define BUREAUCRAT_H
+# include <string>
+# include <iostream>
+# include <exception>
+
 
 class Bureaucrat
 {
@@ -10,6 +13,14 @@ private:
 	short	_grade;
 	void	_setGrade(int);
 	Bureaucrat();
+	class	GradeTooHighException: public std::exception {
+		public:
+			const char* what() const throw();
+	};
+	class	GradeTooLowException: public std::exception {
+		public:
+			const char* what() const throw();
+	};
 public:
 	Bureaucrat(std::string, int = 150);
 	~Bureaucrat();
@@ -22,3 +33,5 @@ public:
 };
 
 std::ostream& operator<<(std::ostream& o, const Bureaucrat& right);
+
+#endif

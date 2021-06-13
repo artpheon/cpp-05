@@ -4,22 +4,21 @@ void	Bureaucrat::_setGrade(int g) {
 	try
 	{
 		if (g < 1)
-			throw 1;
+			throw Bureaucrat::GradeTooHighException();
 		else if (g > 150)
-			throw 150;
+			throw Bureaucrat::GradeTooLowException();
 		else
 			this->_grade = (short)g;
 	}
-	catch (int n)
+	catch (Bureaucrat::GradeTooHighException& e)
 	{
-		if (n == 150) {
-			std::cerr << "Grade too low" << std::endl;
-			this->_grade = 150;
-		}
-		if (n == 1) {
-			std::cerr << "Grade too high!" << std::endl;
-			this->_grade = 1;
-		}
+		std::cerr << e.what() << std::endl;
+		this->_grade = 1;
+	}
+	catch (Bureaucrat::GradeTooLowException& e)
+	{
+		std::cerr << e.what() << std::endl;
+		this->_grade = 150;
 	}
 }
 
@@ -50,6 +49,14 @@ Bureaucrat& Bureaucrat::inc() {
 Bureaucrat& Bureaucrat::dec() {
 	this->_setGrade(this->_grade + 1);
 	return *this;
+}
+
+const char* Bureaucrat::GradeTooHighException::what() const throw() {
+	return "Grade too high!";
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw() {
+	return "Grade too low!";
 }
 
 std::ostream& operator<<(std::ostream& o, const Bureaucrat& right) {

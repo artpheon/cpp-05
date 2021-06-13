@@ -1,8 +1,12 @@
 #include "Bureaucrat.hpp"
 
 int main() {
-	Bureaucrat bur("ME", 0);
-	std::cout << bur << std::endl;
+	Bureaucrat bur("Highest", 0);
+	std::cout << bur << std::endl << std::endl;
+
+	Bureaucrat bure("Lowest", 151);
+	std::cout << bure << std::endl << std::endl;
+
 
 	bur.dec();
 	std::cout << bur.dec().dec().dec() << std::endl;
