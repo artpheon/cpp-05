@@ -63,12 +63,20 @@ std::ostream& operator<<(std::ostream& o, const Bureaucrat& right) {
 	o << right.getName() << ", bureaucrat of grade " << right.getGrade();
 	return o;
 }
-
-void	Bureaucrat::signForm(Form& form) const {
+ /* TRY CATCH? */
+void	Bureaucrat::signForm(AForm& form) const {
 	if (_grade <= form.getGradeToSign()) {
 		std::cout << "<" << _name << "> signs form <" << form.getName() << ">" << std::endl;
 		form.beSigned(*this);
-	}
-	else
+	} else
 		std::cout << "<" << _name << "> cannot sign form <" << form.getName() << "> because their grade is too low." << std::endl;
+}
+
+void	Bureaucrat::execForm(AForm& form) const {
+	try {
+		form.execute(*this);
+	}
+	catch (const std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
 }

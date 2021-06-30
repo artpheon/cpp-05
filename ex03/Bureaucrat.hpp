@@ -1,12 +1,11 @@
-#pragma once
 #ifndef BUREAUCRAT_H
 # define BUREAUCRAT_H
 # include <string>
 # include <iostream>
 # include <exception>
-# include "Form.hpp"
+# include "AForm.hpp"
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -32,7 +31,8 @@ public:
 	int	getGrade() const;
 	Bureaucrat& inc();
 	Bureaucrat& dec();
-	void	signForm(Form&) const;
+	void	signForm(AForm&) const;
+	void	execForm(AForm&) const;
 };
 
 std::ostream& operator<<(std::ostream& o, const Bureaucrat& right);
