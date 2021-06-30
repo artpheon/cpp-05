@@ -80,5 +80,7 @@ int main() {
 	std:: cout << "____________TEST4___________" << std::endl;
 	Intern intern;
 	AForm* form = intern.makeForm("does not exist", "afdg");
+	if (form)
+		form->action();
 	return 0;
 }
